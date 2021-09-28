@@ -76,4 +76,8 @@
 (display "#7\n")
 (define (set-eq? xs ys) (= (length (append xs ys)) (* 2 (length (union xs ys)))))
 (set-eq? '(1 2 3) '(3 2 1))                 
-(set-eq? '(1 2) '(1 3))     
+(set-eq? '(1 2) '(1 3))   
+
+(define (set-eq?? xs ys) (equal? (symmetric-difference xs ys) '()))
+(set-eq?? '(1 2 3) '(3 2 1))                 
+(set-eq?? '(1 2) '(1 3))  
