@@ -47,7 +47,6 @@
 
 
 
-
   (define (my-element? x xs)
     (and (not (null? xs))
          (or (equal? (car xs) x)
@@ -55,9 +54,10 @@
   (display "#3\n" )
   (my-element? 1 '(3 2 1 1)) 
   (my-element? 4 '(3 2 1))
-  ;
-  ;
-  ;
+  
+  
+  
+  
   (define (my-filter f xs)
     (if (null? xs)
         '()
@@ -67,9 +67,10 @@
   (display "#4\n" )
   (my-filter odd? (my-range 0 10 1))
   (my-filter (lambda (x) (= (remainder x 3) 0)) (my-range 0 13 1))
-  ;
-  ;
-  ;
+  
+  
+  
+
 
   (define (loop f start  xs)
     (if (>= (length xs) 2)
@@ -83,9 +84,10 @@
   (my-fold-left  quotient '(16 2 2 2 2))
   (my-fold-left  quotient '(1))
   (my-fold-left expt     '(2 3 4))
-  ;
-  ;
-  ;
+  
+  
+  
+  
   (define (loop2 f start xs)
     (if (>= (length xs) 2)
         (loop2  f (car xs) (cons (f (cadr xs) (car xs)) (cddr xs) ) )
