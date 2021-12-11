@@ -1,0 +1,23 @@
+(define-syntax for
+  (syntax-rules ( in as)
+    ((for x in '(num) expr1 expr2 ...)
+     ((lambda (x) (begin expr1 expr2 ...)) num))
+    ((for x in '(num . xs) expr1 expr2 ...)
+     (begin
+    ((lambda (x) (begin expr1 expr2 ...)) num)
+    (for x in 'xs expr1 expr2 ...)))
+    ((for '(num) as x expr1 expr2 ...)
+     ((lambda (x) (begin expr1 expr2 ...)) num))
+    ((for '(num . xs) as x expr1 expr2 ...)
+     (begin
+    ((lambda (x) (begin expr1 expr2 ...)) num)
+    (for 'xs as x expr1 expr2 ...)))))
+(for i in '(1 2 3)
+  (for j in '(4 5 6)
+    (display (list i j))
+    (newline)))
+
+(for '(1 2 3) as i
+  (for '(4 5 6) as j
+    (display (list i j))
+    (newline)))

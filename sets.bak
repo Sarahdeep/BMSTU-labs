@@ -31,45 +31,38 @@
 
 
 
-(define (intersection xs ys)
-  (cond
-    ((or (null? xs) (null? ys))
-     '())
-    ((member? (car xs) ys)
-     (cons (car xs) (intersection (cdr xs) ys)))
-    (else
-     (intersection (cdr xs) ys))))
+(define (intersection xs ys) (cond
+                               ((or (null? xs) (null? ys))
+                                '())
+                               ((member? (car xs) ys)
+                                (cons (car xs) (intersection (cdr xs) ys)))
+                               (else
+                                (intersection (cdr xs) ys))))
 (display "#4\n")
 (intersection '(1 2 3) '(2 3 4))
 
 
 
-(define (difference xs ys)
-  (cond
-    ((null? xs)
-     '())
-    ((member? (car xs) ys)
-     (difference (cdr xs) ys))
-    (else
-     (cons (car xs) (difference (cdr xs) ys)))))
+(define (difference xs ys) (cond
+                             ((null? xs)
+                              '())
+                             ((member? (car xs) ys)
+                              (difference (cdr xs) ys))
+                             (else
+                              (cons (car xs) (difference (cdr xs) ys)))))
 (display "#5\n")
 (difference '(1 2 3 4 5) '(2 3))
 
 
-(define (symmetric-difference2 xs ys)
-  (append (difference xs ys) (difference ys xs)))
-(symmetric-difference2 '(1 2 3 4) '(3 4 5 6))
 
 
-(define (symmetric-difference xs ys)
-  (define (sym-dif zs)
-    (cond
-      ((null? zs)
-       '())
-      ((member? (car zs) (intersection xs ys)) 
-       (sym-dif (cdr zs)))
-      (else
-       (cons (car zs) (sym-dif (cdr zs))))))
+(define (symmetric-difference xs ys)(define (sym-dif zs) (cond
+                                       ((null? zs)
+                                        '())
+                                       ((member? (car zs) (intersection xs ys)) 
+                                        (sym-dif (cdr zs)))
+                                       (else
+                                        (cons (car zs) (sym-dif (cdr zs))))))
   (sym-dif (union xs ys)))
 (display "#6\n")
 (symmetric-difference '(1 2 3 4) '(3 4 5 6))

@@ -1,0 +1,14 @@
+(define (memoized-factorial n)
+(let (
+     (prev 1)
+     (x 1))
+(define (loop n res)
+  (if (= n 0)
+      res
+      (begin
+        (set! prev res)
+        (set! res (* prev x))
+        (set! x (+ x 1))
+        (loop (- n 1)  res))))(loop n 1)))
+  
+  

@@ -1,0 +1,5 @@
+(load "support defenitions lab3.rkt")
+(define (ref . xs)
+  (if (twoargs? xs)
+      (ref-type (car xs) (cadr xs))
+      (insert-type (car xs) (cadr xs) (caddr xs))))

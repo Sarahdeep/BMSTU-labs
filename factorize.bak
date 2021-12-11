@@ -1,0 +1,25 @@
+(define (factorize xs)
+  
+(let*(
+     (sign `(,(car xs)))
+     (identif1 (cadr xs))
+     (power (caddr identif1))
+     (identif2 (caddr xs))
+     (y (cadr identif2))
+  (x (cadr identif1)))
+  (cond
+    ((and (equal? sign '(+)) (equal? power 3))
+     `(* (+ ,x ,y) (- (+ (* ,x ,x) (* ,y ,y)) (* ,x ,y))))
+    ((equal? sign '(-))
+     (cond
+  ((= power 2)
+   `(* (+ ,x ,y) (- ,x ,y)))
+  ((= power 3)
+    `(* (- ,x ,y) (+  (* ,x ,x) (* ,y ,y) (* ,x ,y))))
+  (else #f)))
+    (else  sign))))
+
+
+
+
+    

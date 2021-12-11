@@ -1,0 +1,31 @@
+(define (f x) (+ x 2))
+(define (g x) (* x 3))
+(define (h x) (- x))
+
+(define (o . xs)
+  (lambda (x)
+    (if (null? xs)
+        x
+        ((car xs) ((apply o (cdr xs)) x)))))
+   
+
+((o f g h) 1) 
+((o f g) 1)   
+((o h) 1)     
+((o) 2)
+(define (loop2 f start xs)
+  (if (>= (length xs) 2)
+      (loop2  f (car xs) (cons (f (cadr xs) (car xs)) (cddr xs) ) )
+      (car xs) ))
+(define (my-fold-right f xs)
+  (if (> (length xs) 1)
+      (loop2 f (car (reverse xs))  (reverse xs))
+      (car xs)))
+(define (o1 . xs)
+  (lambda (x)
+  (my-fold-right (car xs) xs)x))
+
+((o1 f g h) 1) 
+((o1 f g) 1)   
+((o1 h) 1)     
+((o1) 2)

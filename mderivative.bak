@@ -1,0 +1,5 @@
+(define-syntax mderivative 
+  (syntax-rules ()
+    ((mderivative xs)
+    (eval (derivative xs)
+          (interaction-enviroment)))))

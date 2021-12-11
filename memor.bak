@@ -1,0 +1,34 @@
+(define (trib n)
+  (cond
+    ((<= n 1) 0)
+    ((= n 2) 1)
+    ((> n 2) (+ (trib (- n 1)) (trib (- n 2)) (trib (- n 3))))))
+
+(define memotrib 
+  (let ((last-arg0 0)
+        (last-arg1 0)
+        (last-arg2 1)
+        (arg #f))
+    (lambda(n)
+      (define (loop n)
+        (if (> n 2)
+            (begin
+              (set! arg (+ last-arg0 last-arg1 last-arg2))
+              (set! last-arg0 last-arg1)
+              (set! last-arg1 last-arg2)
+              (set! last-arg2 arg)
+              (loop (- n 1))
+              )
+            (begin
+              (set! last-arg0 0)
+              (set! last-arg1 0)
+              (set! last-arg2 1)
+              arg)))
+      (cond
+        ((<= n 1) 0)
+        ((= n 2) 1)
+        (else 
+         (loop n))
+        ))))
+
+     

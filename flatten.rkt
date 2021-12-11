@@ -1,0 +1,12 @@
+(define (my-flatten xs)
+  (if (null? xs)
+      '()
+      (if (list? xs)
+          (append (my-flatten  (car xs)) (my-flatten (cdr xs)))
+          (list xs))))
+(define-syntax flatten
+  (syntax-rules ()
+    ((flatten xs)
+     (let( (xy (my-flatten (quote xs))))
+     (eval xy (interaction-environment))))))
+(flatten (((+) 1) (2 (3) ((4)))))

@@ -10,7 +10,21 @@
 
 
              
+(define (extract list xs)
+    (if (null? list)
+        xs
+        (extract (cdr list) (cons (car list) xs))))
 
+
+
+(define (my-flatten3 xs)
+  (define (loop xs res)
+    (if (null? xs)
+        res
+        (if (not (list? (car xs)))
+            (loop (cdr xs) (cons (car xs) res)) 
+            (loop (extract  (car xs) (cdr xs)) res))))
+  (loop xs '()))
   
 
 (define (my-flatten xs)

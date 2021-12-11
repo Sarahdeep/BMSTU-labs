@@ -1,0 +1,3 @@
+(with-output-to-file "D:/test.txt"
+  (lambda ()
+    (display 'hello)))

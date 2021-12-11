@@ -1,0 +1,10 @@
+(define-syntax test
+  (syntax-rules ()
+    ( (test def  res )
+      (begin 
+      
+      (let ((xs def)
+            (result res))
+        (list xs result))))))
+      
+

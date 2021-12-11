@@ -1,0 +1,8 @@
+(define-syntax my-if
+  (syntax-rules ()
+  ((my-if cond t f)
+    (let ((ti (delay t))
+      (fi (delay f)))
+      (or (and cond (force ti)) (force fi))))))
+ 
+  
