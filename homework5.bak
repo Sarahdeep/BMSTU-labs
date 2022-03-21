@@ -36,7 +36,7 @@
                 ((equal? word 'end) (main (car return-stack) stack (cdr return-stack) dictionary))
                 ((equal? word 'exit) (main (car return-stack) stack (cdr return-stack) dictionary))
                 ((equal? word 'if) (if (= (car stack) 0)
-                   (main (or (count (+ counter 1) program 'else) (countif (+ counter 1) program 'endif 'if)) (cdr stack) return-stack  dictionary) 
+                   (main (or (countif (+ counter 1) program 'if 'else) (countif (+ counter 1) program 'endif 'if)) (cdr stack) return-stack  dictionary) 
                    (main (+ counter 1) (cdr stack) return-stack dictionary) ))
                 ((equal? word 'else) (main (countif counter program 'endif 'if) stack return-stack dictionary))
                 ((equal? word 'endif) (main (+ counter 1) stack return-stack dictionary))

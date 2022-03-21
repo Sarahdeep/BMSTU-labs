@@ -1,10 +1,12 @@
 (define (check-frac str)
-  (if (or (char-numeric? (string-ref  str 0)) (and (or (equal? (string-ref str 0) #\- ) (equal? (string-ref  str 0) #\+ ))  (char-numeric? (string-ref  str 1))))
+  (if (equal? str "") #f
+  (if (or (char-numeric? (string-ref  str 0)) (and (and (or (equal? (string-ref str 0) #\- ) (equal? (string-ref  str 0) #\+ ))) (> (string-length str) 1)  (char-numeric? (string-ref  str 1))))
       (lekser (string->list (substring   str 1)))
-      #f))
+      #f)))
 
 (define (lekser xs)
   (cond
+    ((null? xs) #f)
     ((char-numeric? (car xs)) (lekser (cdr xs)))
     ((and (equal? (car xs) #\/) (char-numeric? (cadr xs))) (denominate (cdr xs)))
     (else #f)))
@@ -92,11 +94,14 @@
    (if (> (+ counter 1) (vector-length tokens)) '()
       (let ((term (vector-ref tokens counter)))
    (cond
-     ((equal? term 'if) (cons (list term (body  tokens (+ counter 1) flag))  (body tokens  (vipcounter tokens counter 0) flag )))
+     ((equal? term 'if) (cons (list term (body  tokens (+ counter 1) 2))  (body tokens  (vipcounter tokens counter 0) flag )))
      ((equal? term 'end)
       (if (= flag 1)'()
           (x #f)))
-     ((equal? term 'endif) '())
+     ((equal? term 'endif)
+      (if (not (= flag 2))
+          (x #f)
+          '()))
      (else (cons term (body  tokens (+ counter 1) flag )))))))
                         
    
@@ -201,7 +206,16 @@ end
       
       
       
-    
+    ; (parse #(define x if end endif))
+;(((x ((if ())))) ())
+;> (parse #(define x))
+;#f
+;> (parse #(if))
+
+;> (parse #(endif))
+
+;> (parse #(endif 10))
+
 
                   
  ;(   ((-- (1 -))

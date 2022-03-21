@@ -1,3 +1,3 @@
-(display "loaded successfully")
-(define call/cc call-with-current-continuation)
+display loaded successfully
+define call/cc call-with-current-continuation
                 
